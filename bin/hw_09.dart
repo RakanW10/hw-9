@@ -1,6 +1,8 @@
 import 'classes/Book.dart';
 import 'classes/user.dart';
+import 'package:chalkdart/chalk.dart';
 import 'dart:io';
+
 
 enum oprations { exit, add, delete, edit, viewInfo }
 
@@ -68,14 +70,14 @@ void main() {
 void menu() {
   print("=" * 82);
   print("==\t\t\t\t\t\t\t\t\t\t==");
-  print("==\t\t\t\t     Library\t\t\t\t\t==");
+  print(chalk.yellow.onBlue.bold("==\t\t\t\tLibrary\t\t\t\t\t        =="));
   print("==\t\t\t\t\t\t\t\t\t\t==");
   print("=" * 82);
-  print("== 1) To add a book, choose 1\t\t\t\t\t\t\t==");
-  print("== 2) To remove a book, choose 2\t\t\t\t\t\t==");
-  print("== 3) To edit a book, choose 3\t\t\t\t\t\t\t==");
-  print("== 4) To view information, choose 4\t\t\t\t\t\t==");
-  print("== 0) To exit, choose 0\t\t\t\t\t\t\t\t==");
+  print(chalk.underline.blink.blue("== 1) To add a book, choose 1\t\t\t\t\t\t\t=="));
+  print(chalk.underline.blink.blue("== 2) To remove a book, choose 2\t\t\t\t\t\t=="));
+  print(chalk.underline.blink.blue("== 3) To edit a book, choose 3\t\t\t\t\t\t\t=="));
+  print(chalk.underline.blink.blue("== 4) To view information, choose 4\t\t\t\t\t\t=="));
+  print(chalk.underline.blink.blue("== 0) To exit, choose 0\t\t\t\t\t\t\t\t=="));
   print("=" * 82);
 }
 
@@ -127,7 +129,7 @@ void addBook() {
     if (bookId == 0) return;
     if (serachByID(bookId) != -1) {
       print(
-          "This book id alread exist.\nplease enter anothor or (0) to exit. ");
+        chalk.onRed("This book id alread exist.\nplease enter anothor or (0) to exit. "));
     } else
       break;
   } while (true);
@@ -140,7 +142,7 @@ void addBook() {
     if (bookTitle == "0") return;
     if (serachByTitle(bookTitle) != -1) {
       print(
-          "This book title alread exist.\nplease enter anothor or (0) to exit. ");
+        chalk.onRed  ("This book title alread exist.\nplease enter anothor or (0) to exit. "));
     } else
       break;
   } while (true);
@@ -168,7 +170,7 @@ void removeBook() {
   if (bookIndex != -1) {
     // title is found. removing ...
     removedBook = books.removeAt(bookIndex);
-    print("Book with title [${removedBook.getTitle}] is removed.");
+    print(chalk.bgBlue("Book with title [${removedBook.getTitle}] is removed."));
   } else {
     // it is not a title. search for id or it could be an invaled input.
     try {
@@ -176,12 +178,12 @@ void removeBook() {
       if (bookIndex != -1) {
         // id is found. removing ...
         removedBook = books.removeAt(bookIndex);
-        print("Book with title [${removedBook.getTitle}] is removed.");
+        print(chalk.bgBlue("Book with title [${removedBook.getTitle}] is removed."));
       } else {
-        print("There is no book with the given Id or Title");
+        print(chalk.onRed("There is no book with the given Id or Title"));
       }
     } catch (e) {
-      print("There is no book with the given Id or Title");
+      print(chalk.onRed("There is no book with the given Id or Title"));
     }
   }
 }
@@ -201,7 +203,7 @@ int checkInt(String op) {
         break;
       } catch (e) {/* do nothing */}
     }
-    stdout.write("Wrong input, please enter an integer number ");
+    stdout.write(chalk.onRed("Wrong input, please enter an integer number "));
     op = stdin.readLineSync()!;
   } while (true);
   return returnOp;
@@ -221,7 +223,7 @@ double checkdouble(String op) {
         break;
       } catch (e) {/* do nothing */}
     }
-    stdout.write("Wrong input, please choose one of the serveces: ");
+    stdout.write(chalk.onRed("Wrong input, please choose one of the serveces: "));
     op = stdin.readLineSync()!;
   } while (true);
   return returnOp;
